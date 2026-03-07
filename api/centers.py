@@ -4,6 +4,8 @@ from pydantic import BaseModel
 from typing import List, Optional, Dict, Any
 import httpx
 import time
+from mangum import Mangum
+handler = Mangum(app)
 
 app = FastAPI(title="Autism Centers – OSM Backend")
 
