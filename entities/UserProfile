@@ -1,0 +1,82 @@
+{
+  "name": "UserProfile",
+  "type": "object",
+  "properties": {
+    "user_email": {
+      "type": "string"
+    },
+    "child_name": {
+      "type": "string"
+    },
+    "child_dob": {
+      "type": "string",
+      "format": "date"
+    },
+    "child_age_months": {
+      "type": "number"
+    },
+    "saved_centers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "badges_earned": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "modules_completed": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "journal_entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "mood": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "milestones_tracked": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "milestone_id": {
+            "type": "string"
+          },
+          "achieved": {
+            "type": "boolean"
+          },
+          "noted_date": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "consent_hipaa": {
+      "type": "boolean",
+      "default": false
+    },
+    "newsletter_opt_in": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "user_email"
+  ]
+}

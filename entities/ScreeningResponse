@@ -1,0 +1,58 @@
+{
+  "name": "ScreeningResponse",
+  "type": "object",
+  "properties": {
+    "child_age_months": {
+      "type": "number",
+      "description": "Child's age in months"
+    },
+    "child_name": {
+      "type": "string"
+    },
+    "parent_email": {
+      "type": "string"
+    },
+    "answers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "question_id": {
+            "type": "string"
+          },
+          "question_text": {
+            "type": "string"
+          },
+          "answer": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "risk_level": {
+      "type": "string",
+      "enum": [
+        "low",
+        "moderate",
+        "high"
+      ],
+      "description": "Calculated risk level"
+    },
+    "summary": {
+      "type": "string",
+      "description": "AI-generated summary of results"
+    },
+    "consent_given": {
+      "type": "boolean",
+      "default": false
+    },
+    "consent_timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "child_age_months",
+    "consent_given"
+  ]
+}

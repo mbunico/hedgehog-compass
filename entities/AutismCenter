@@ -1,0 +1,80 @@
+{
+  "name": "AutismCenter",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the autism center"
+    },
+    "address": {
+      "type": "string",
+      "description": "Full street address"
+    },
+    "city": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string"
+    },
+    "zip_code": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "website": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "rating": {
+      "type": "number",
+      "description": "Average rating out of 5"
+    },
+    "review_count": {
+      "type": "number"
+    },
+    "waitlist_time": {
+      "type": "string",
+      "description": "Estimated waitlist duration e.g. '2-3 months'"
+    },
+    "services": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Services offered like ABA, Speech Therapy, OT, etc."
+    },
+    "insurance_accepted": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "age_range": {
+      "type": "string",
+      "description": "Age range served e.g. '2-18 years'"
+    },
+    "description": {
+      "type": "string"
+    },
+    "latitude": {
+      "type": "number"
+    },
+    "longitude": {
+      "type": "number"
+    },
+    "image_url": {
+      "type": "string"
+    },
+    "verified": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "name",
+    "state"
+  ]
+}

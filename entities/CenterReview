@@ -1,0 +1,43 @@
+{
+  "name": "CenterReview",
+  "type": "object",
+  "properties": {
+    "center_id": {
+      "type": "string",
+      "description": "ID of the autism center"
+    },
+    "rating": {
+      "type": "number",
+      "description": "Rating 1-5"
+    },
+    "title": {
+      "type": "string"
+    },
+    "review_text": {
+      "type": "string"
+    },
+    "reviewer_name": {
+      "type": "string"
+    },
+    "is_parent": {
+      "type": "boolean",
+      "default": true
+    },
+    "child_age_at_time": {
+      "type": "string"
+    },
+    "services_used": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "would_recommend": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "center_id",
+    "rating"
+  ]
+}
