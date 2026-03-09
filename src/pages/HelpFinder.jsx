@@ -122,7 +122,7 @@ export default function HelpFinder() {
     if (!stateCode) { setError("Please select a specific state first."); return; }
     setLoading(true);
     try {
-      const res = await fetch(`http://127.0.0.1:8000/api/centers?state=${stateCode}`);
+      const res = await fetch(`http://hedgehog-compass.vercel.app/api/centers?state=${stateCode}`);
       if (!res.ok) {
         const err = await res.json().catch(() => ({}));
         throw new Error(err.detail || `Server error ${res.status}`);
