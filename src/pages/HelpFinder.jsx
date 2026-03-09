@@ -53,7 +53,7 @@ const STATE_COORDS = {
 
 const STORAGE_KEY = "autism_centers_v2";
 // @ts-ignore
-// const API_BASE = import.meta.env.VITE_API_URL;
+const API_BASE = import.meta.env.VITE_API_URL;
 
 // ─── Map updater ─────────────────────────────────────────────────────────────
 function MapUpdater({ center, zoom }) {
@@ -122,7 +122,7 @@ export default function HelpFinder() {
     if (!stateCode) { setError("Please select a specific state first."); return; }
     setLoading(true);
     try {
-      const res = await fetch(`/api/centers?state=${stateCode}`);
+      const res = await fetch(`${API_BASE}/centers?state=${stateCode}`);
       if (!res.ok) throw new Error(`Server error ${res.status}`);
       const data = await res.json();
       setLastCached(data.cached);
