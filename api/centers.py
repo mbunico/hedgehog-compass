@@ -4,7 +4,6 @@ from pydantic import BaseModel
 from typing import List, Optional, Dict, Any
 import httpx
 import time
-from mangum import Mangum
 
 app = FastAPI(title="Autism Centers – OSM Backend")
 
@@ -269,5 +268,5 @@ async def cache_status():
         }
         for s, v in _cache.items()
     }
-
+from mangum import Mangum
 handler = Mangum(app)
