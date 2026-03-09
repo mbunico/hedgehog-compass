@@ -11,7 +11,7 @@ app = FastAPI(title="Autism Centers – OSM Backend")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://hedgehog-compass.vercel.app",
+        "http://hedgehog-compass.vercel-v1.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
