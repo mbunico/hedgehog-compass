@@ -108,7 +108,7 @@ export default function HelpFinder() {
   const ITEMS_PER_PAGE              = 9;
 
   useEffect(() => {
-    try { const raw = localStorage.getItem(STORAGE_KEY); if (raw) setCenters(JSON.parse(raw)); } catch (_) {}
+    try { const raw = localStorage.getItem(STORAGE_KEY); if (raw) setCenters(JSON.parse(raw)); } catch (_) { /* empty */ }
   }, []);
 
   useEffect(() => {
@@ -122,26 +122,22 @@ export default function HelpFinder() {
     if (!stateCode) { setError("Please select a specific state first."); return; }
     setLoading(true);
     try {
-      const res = await fetch(`http://hedgehog-compass.vercel.app/api/centers?state=${stateCode}`);
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({}));
-        throw new Error(err.detail || `Server error ${res.status}`);
-      }
+      const res = await fetch(`/api/centers?state=${stateCode}`);
+      if (!res.ok) throw new Error(`Server error ${res.status}`);
       const data = await res.json();
       setLastCached(data.cached);
 
-      if (!data.centers?.length) {
+      if (data.centers?.length) {
+        setCenters((prev) => {
+          const existing = new Set(prev.map((c) => c.id));
+          const fresh = data.centers.filter((c) => !existing.has(c.id));
+          return [...prev, ...fresh];
+        });
+
+        if (STATE_COORDS[stateCode]) { setMapCenter(STATE_COORDS[stateCode]); setMapZoom(7); }
+      } else {
         setError(`No centers found in OpenStreetMap for ${stateCode}.`);
-        return;
       }
-
-      setCenters((prev) => {
-        const existing = new Set(prev.map((c) => c.id));
-        const fresh = data.centers.filter((c) => !existing.has(c.id));
-        return [...prev, ...fresh];
-      });
-
-      if (STATE_COORDS[stateCode]) { setMapCenter(STATE_COORDS[stateCode]); setMapZoom(7); }
     } catch (e) {
       setError(e.message);
     } finally {
@@ -187,7 +183,7 @@ export default function HelpFinder() {
       </div>
 
       {/* Filter bar — z-[100] keeps it above normal page content */}
-      <div className="bg-white border-b border-gray-100 shadow-sm sticky top-16 z-[100]">
+      <div className="bg-white border-b border-gray-100 shadow-sm sticky top-16 z-100">
         <div className="max-w-7xl mx-auto px-6 py-4 flex flex-wrap gap-3 items-center justify-between">
           <div className="flex flex-wrap gap-3 flex-1">
 
@@ -237,7 +233,7 @@ export default function HelpFinder() {
             <button
               onClick={fetchCenters}
               disabled={loading}
-              className="flex items-center gap-2 bg-gradient-to-r from-[#6B8F71] to-[#457B9D] text-white font-bold px-5 py-2.5 rounded-xl shadow hover:shadow-lg transition-all disabled:opacity-60 whitespace-nowrap"
+              className="flex items-center gap-2 bg-linear-to-r from-[#6B8F71] to-[#457B9D] text-white font-bold px-5 py-2.5 rounded-xl shadow hover:shadow-lg transition-all disabled:opacity-60 whitespace-nowrap"
             >
               <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
               {loading ? "Fetching…" : `Load ${state === "All States" ? "a State" : state}`}
@@ -381,7 +377,7 @@ export default function HelpFinder() {
                   onClick={() => setSelected(c)}
                   className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden cursor-pointer hover:shadow-md transition-shadow"
                 >
-                  <div className="h-2 bg-gradient-to-r from-[#6B8F71] to-[#457B9D]" />
+                  <div className="h-2 bg-linear-to-r from-[#6B8F71] to-[#457B9D]" />
                   <div className="p-5">
                     <div className="flex items-start justify-between mb-2">
                       <div className="flex-1 min-w-0">
@@ -493,14 +489,14 @@ export default function HelpFinder() {
       {/* Detail Modal — z-[9999] always above everything */}
       {selected && (
         <div
-          className="fixed inset-0 bg-black/50 z-[9999] flex items-center justify-center p-4"
+          className="fixed inset-0 bg-black/50 z-9999 flex items-center justify-center p-4"
           onClick={() => setSelected(null)}
         >
           <div
             className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="h-3 bg-gradient-to-r from-[#6B8F71] to-[#457B9D] rounded-t-3xl" />
+            <div className="h-3 bg-linear-to-r from-[#6B8F71] to-[#457B9D] rounded-t-3xl" />
             <div className="p-8">
 
               <div className="flex items-start justify-between mb-4">
