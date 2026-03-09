@@ -1,9 +1,9 @@
 {
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/app.py" }
+    { "source": "/api/(.*)", "destination": "/api/centers.py" }
   ],
   "functions": {
-    "api/app.py": {
+    "api/centers.py": {
       "maxDuration": 30,
       "memory": 512
     }

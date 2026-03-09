@@ -12,8 +12,6 @@ export default defineConfig({
       "/api": {
         target: "http://hedgehog-compass.vercel.app",
         changeOrigin: true,
-        secure: false,
-        rewrite: (path) => path.replace(/^\/api/, "")
       },
     },
   },
