@@ -1,6 +1,6 @@
 {
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/centers.py" }
+    { "source": "/api/centers", "destination": "/api/centers.py" }
   ],
   "functions": {
     "api/centers.py": {

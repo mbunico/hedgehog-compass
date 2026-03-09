@@ -10,7 +10,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://hedgehog-compass.vercel.app",
+        target: "http://hedgehog-compass.vercel.app/api/centers",
         changeOrigin: true,
       },
     },
