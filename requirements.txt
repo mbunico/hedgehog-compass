@@ -1,4 +1,4 @@
-Python==3.11.0
+Python==3.12.12
 fastapi==0.104.1
 httpx==0.25.2
 pydantic==2.7.2
