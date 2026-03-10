@@ -1,11 +1,15 @@
 {
-  "rewrites": [
-    { "source": "/api/centers", "destination": "/api/centers.py" }
+  "version": 2,
+  "builds": [
+      {
+          "src": "./centers.py",
+          "use": "@vercel/python"
+      }
   ],
-  "functions": {
-    "api/centers.py": {
-      "maxDuration": 30,
-      "memory": 512
-    }
+  "routes": [
+      {
+          "src": "/(.*)",
+          "dest": "/centers.py"
+      }
+  ]
   }
-}

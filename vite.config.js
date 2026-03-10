@@ -10,8 +10,9 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://hedgehog-compass.vercel.app/api/centers",
+        target: "https://autism-centers.vercel.app",
         changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, "")
       },
     },
   },
