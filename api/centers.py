@@ -180,7 +180,7 @@ def parse_element(el: dict, state_code: str) -> Optional[dict]:
 
 
 # ─── Endpoint ─────────────────────────────────────────────────────────────────
-@app.get("/centers")
+@app.get("/api/centers")
 async def get_centers(
     state: str = Query(
         ...,
