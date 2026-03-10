@@ -122,7 +122,7 @@ export default function HelpFinder() {
     if (!stateCode) { setError("Please select a specific state first."); return; }
     setLoading(true);
     try {
-      const res = await fetch(`${API_BASE}/centers?state=${stateCode}`);
+      const res = await fetch(`${API_BASE}?state=${stateCode}`);
       if (!res.ok) throw new Error(`Server error ${res.status}`);
       const data = await res.json();
       setLastCached(data.cached);
