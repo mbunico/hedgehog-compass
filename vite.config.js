@@ -9,10 +9,10 @@ export default defineConfig({
     tailwind()],
   server: {
     proxy: {
-      "/": {
-        target: "https://autism-centers.vercel.app",
+      "/api": {
+        target: "http://127.0.0.1:8000",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\//, "")
+        rewrite: (path) => path.replace(/^\/api/, "")
       },
     },
   },
